@@ -2,7 +2,7 @@
 title: "Arko Bhet Sama"
 releaseDate: 2025-03-28
 coverImage: "/images/album-cover.webp"
-youtubeEmbed: "https://www.youtube.com/embed/xxh1hjpLWhQ?si=phYCiNuNkNpLYv7U"
+youtubeEmbed: ""
 # streamingLinks:
 #   spotify: "#"
 #   apple: "#"

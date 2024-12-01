@@ -12,12 +12,13 @@ const latestRelease = releases.sort(
 {
   latestRelease && (
     <section class="relative min-h-screen flex items-center justify-center py-20 px-4">
-      <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 z-0 flex items-center justify-center">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-midnight" />
         <img
           src={latestRelease.data.coverImage}
           alt={latestRelease.data.title}
-          class="w-full h-full object-cover opacity-20"
+          class="w-full h-full object-cover object-center opacity-20"
+          id="parallax-image"
         />
       </div>
 
@@ -71,5 +72,13 @@ const latestRelease = releases.sort(
         )}
       </div>
     </section>
+    <script>
+      const parallaxImage = document.getElementById('parallax-image');
+
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        parallaxImage.style.transform = `translateY(${scrollPosition * 0.3}px)`; // Adjust 0.3 to control speed
+      });
+    </script>
   )
 }
