@@ -1,0 +1,75 @@
+---
+import { getCollection } from "astro:content";
+import { formatDate } from "../utils/date-formatter";
+import StreamingLink from "./StreamingLink.astro";
+
+const releases = await getCollection("releases");
+const latestRelease = releases.sort(
+  (a, b) => b.data.releaseDate.getTime() - a.data.releaseDate.getTime()
+)[0];
+---
+
+{
+  latestRelease && (
+    <section class="relative min-h-screen flex items-center justify-center py-20 px-4">
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-midnight" />
+        <img
+          src={latestRelease.data.coverImage}
+          alt={latestRelease.data.title}
+          class="w-full h-full object-cover opacity-20"
+        />
+      </div>
+
+      <div class="relative z-10 max-w-4xl mx-auto text-center">
+        {latestRelease.data.youtubeEmbed && (
+          <iframe
+            width="560"
+            height="315"
+            src={latestRelease.data.youtubeEmbed}
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          />
+        )}
+        <h1 class="text-5xl md:text-7xl font-bold mb-4 glow">
+          {latestRelease.data.title}
+        </h1>
+        <p class="text-xl mb-8 text-violet-glow">
+          Release date - {formatDate(latestRelease.data.releaseDate)}
+        </p>
+
+        {latestRelease.data.streamingLinks && (
+          <div class="flex justify-center gap-6">
+            {latestRelease.data.streamingLinks.spotify && (
+              <StreamingLink
+                href={latestRelease.data.streamingLinks.spotify}
+                platform="spotify"
+              />
+            )}
+            {latestRelease.data.streamingLinks.apple && (
+              <StreamingLink
+                href={latestRelease.data.streamingLinks.apple}
+                platform="apple"
+              />
+            )}
+            {latestRelease.data.streamingLinks.youtube && (
+              <StreamingLink
+                href={latestRelease.data.streamingLinks.youtube}
+                platform="youtube"
+              />
+            )}
+            {latestRelease.data.streamingLinks.bandcamp && (
+              <StreamingLink
+                href={latestRelease.data.streamingLinks.bandcamp}
+                platform="bandcamp"
+              />
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}

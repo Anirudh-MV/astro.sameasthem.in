@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ContentSection from '../components/ContentSection.astro';
+
+const sections = [
+  {
+    title: "Same as Them",
+    content: `We are Same As Them, a Bangalore based alternate rock band.
+      <br> Formed in the year
+      2015 by siblings Namgyal “Nash” Lama the Vocalist/Rhythm Guitar and Rigyal Lama on
+      Lead Guitarist/Backing Vocals.
+      Reuben Aditya on Drums and Anirudh MV on Bass.
+      <br> Same as Them takes pride in singing and performing in Nepali. Through the music, we
+      keep the harmonic connection between each and every human being alive.
+      Our fundamentals remain the same - We draw inspiration from the beauty, celebration,
+      turmoil, people, life, love and hardships that everyday life has to offer.`,
+    image: "/images/album-detail.webp",
+    reverse: false
+  },
+  {
+    title: "",
+    content: `<br> Everybody got to escalate from the norm
+      <br> Everybody got to elevate from the norm
+      <br> Everybody got to deviate from the norm`,
+    image: "/images/about.webp",
+    reverse: false
+  }
+];
+---
+
+<Layout title="Same as Them - Official Website">
+  <main class="pt-16"> <!-- Added padding-top to account for fixed navbar -->
+    <HeroSection />
+    
+    {sections.map(section => (
+      <ContentSection
+        title={section.title}
+        content={section.content}
+        image={section.image}
+        imageAlt={section.title}
+        reverse={section.reverse}
+      />
+    ))}
+  </main>
+</Layout>

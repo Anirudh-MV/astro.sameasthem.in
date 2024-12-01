@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ShowCard from '../../components/ShowCard.astro';
+
+const allShows = await getCollection('shows');
+const now = new Date();
+
+// Filter and sort upcoming shows
+const upcomingShows = allShows
+  .filter(show => new Date(show.data.date) >= now)
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+---
+
+<Layout title="Upcoming Shows" description="Check out our upcoming live performances">
+  <main class="max-w-7xl mx-auto px-4 py-24">
+    <h1 class="text-4xl md:text-5xl font-bold mb-12 glow text-center">
+      Upcoming Shows
+    </h1>
+    
+    {upcomingShows.length > 0 ? (
+      <div class="grid gap-8">
+        {upcomingShows.map(show => (
+          <ShowCard
+            venue={show.data.venue}
+            date={show.data.date}
+            location={show.data.location}
+            ticketLink={show.data.ticketLink}
+            price={show.data.price}
+            description={show.data.description}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-center text-gray-400 text-xl">
+        No upcoming shows scheduled at the moment. Which most likely means we're busy working on new music.
+        <br> Follow us on our socials for any update on upcoming shows
+      </p>
+    )}
+  </main>
+</Layout>

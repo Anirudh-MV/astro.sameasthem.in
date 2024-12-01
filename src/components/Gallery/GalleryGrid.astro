@@ -1,0 +1,26 @@
+---
+import GalleryImage from './GalleryImage.astro';
+import type { ImageData } from '../../types/gallery';
+
+interface Props {
+  images: ImageData[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+  {images.map((image, index) => (
+    <GalleryImage
+      src={image.src}
+      alt={image.alt}
+      caption={image.caption}
+      index={index}
+    />
+  ))}
+</div>
+
+<script>
+  import { initializeGallery } from '../../utils/gallery';
+  initializeGallery();
+</script>

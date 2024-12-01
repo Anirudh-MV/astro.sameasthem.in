@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GalleryGrid from '../../components/Gallery/GalleryGrid.astro';
+import Lightbox from '../../components/Gallery/Lightbox.astro';
+import type { ImageData } from '../../types/gallery';
+
+// In a real application, this would come from a CMS or database
+const images: ImageData[] = [
+  {
+    src: "/images/gallery/performance-1.jpg",
+    alt: "Live performance at Summer Festival",
+    caption: "Headlining the Summer Festival main stage"
+  },
+  {
+    src: "/images/gallery/studio-1.jpg",
+    alt: "Recording session",
+    caption: "Recording new tracks at Sunset Studios"
+  },
+  {
+    src: "/images/gallery/backstage-1.jpg",
+    alt: "Backstage moments",
+    caption: "Behind the scenes at The Underground"
+  },
+  // Add more images as needed
+];
+---
+
+<Layout title="Gallery" description="Photo gallery of performances and behind-the-scenes moments">
+  <main class="max-w-7xl mx-auto px-4 py-24">
+    <h1 class="text-4xl md:text-5xl font-bold mb-12 glow text-center">
+      Gallery
+    </h1>
+    
+    <GalleryGrid images={images} />
+    <Lightbox />
+  </main>
+</Layout>

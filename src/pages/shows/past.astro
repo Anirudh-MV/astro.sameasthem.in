@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PastShowCard from '../../components/PastShowCard.astro';
+
+const allShows = await getCollection('shows');
+const now = new Date();
+
+// Filter and sort past shows
+const pastShows = allShows
+  .filter(show => new Date(show.data.date) < now)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Layout title="Past Shows" description="Browse our previous performances">
+  <main class="max-w-7xl mx-auto px-4 py-24">
+    <h1 class="text-4xl md:text-5xl font-bold mb-12 glow text-center">
+      Past Shows
+    </h1>
+    
+    {pastShows.length > 0 ? (
+      <div class="grid gap-8">
+        {pastShows.map(show => (
+          <PastShowCard
+            venue={show.data.venue}
+            date={show.data.date}
+            location={show.data.location}
+            description={show.data.description}
+            review={show.data.review}
+            images={show.data.images}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-center text-gray-400 text-xl">
+        No past shows to display yet. Check out our upcoming shows!
+      </p>
+    )}
+  </main>
+</Layout>

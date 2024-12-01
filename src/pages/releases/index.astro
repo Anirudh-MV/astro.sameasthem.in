@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ReleaseCard from '../../components/ReleaseCard.astro';
+
+const releases = await getCollection('releases');
+const sortedReleases = releases.sort((a, b) => 
+  b.data.releaseDate.getTime() - a.data.releaseDate.getTime()
+);
+---
+
+<Layout title="Releases" description="Browse our music releases">
+  <main class="max-w-7xl mx-auto px-4 py-24">
+    <h1 class="text-4xl md:text-5xl font-bold mb-12 glow text-center">
+      Releases
+    </h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {sortedReleases.map(release => (
+        <ReleaseCard
+          title={release.data.title}
+          releaseDate={release.data.releaseDate}
+          coverImage={release.data.coverImage}
+          description={release.body}
+          streamingLinks={release.data.streamingLinks}
+        />
+      ))}
+    </div>
+  </main>
+</Layout>

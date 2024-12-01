@@ -1,0 +1,42 @@
+---
+import NavLink from './NavLink.astro';
+import { navItems } from './navItems';
+---
+
+<div
+  id="mobile-menu"
+  class="fixed inset-y-0 right-0 transform translate-x-full transition-transform duration-300 ease-in-out w-64 bg-deep-blue shadow-lg z-50 lg:hidden"
+>
+  <div class="flex flex-col p-4 bg-black/90">
+    <button
+      id="close-menu"
+      class="self-end p-2 text-white hover:text-violet-glow transition-colors duration-200"
+      aria-label="Close menu"
+    >
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    
+    <nav class="flex flex-col gap-4 mt-8">
+      {navItems.map(item => (
+        <NavLink href={item.href} label={item.label} />
+      ))}
+    </nav>
+  </div>
+</div>
+
+<script>
+  const mobileMenu = document.getElementById('mobile-menu');
+  const openButton = document.getElementById('open-menu');
+  const closeButton = document.getElementById('close-menu');
+
+  function toggleMenu(show: boolean) {
+    if (mobileMenu) {
+      mobileMenu.style.transform = show ? 'translateX(0)' : 'translateX(100%)';
+    }
+  }
+
+  openButton?.addEventListener('click', () => toggleMenu(true));
+  closeButton?.addEventListener('click', () => toggleMenu(false));
+</script>

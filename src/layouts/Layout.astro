@@ -1,0 +1,71 @@
+---
+import Navbar from '../components/Navigation/Navbar.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title,
+  description = "Official music website"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-midnight text-white min-h-screen">
+    <Navbar />
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  :root {
+    --glow-shadow: 0 0 15px theme('colors.violet-glow');
+  }
+
+  .glow {
+    text-shadow: var(--glow-shadow);
+  }
+
+  .hover-glow:hover {
+    text-shadow: var(--glow-shadow);
+    transition: text-shadow 0.3s ease;
+  }
+
+  /* Smooth scrolling behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: theme('colors.midnight');
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.violet-accent');
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.violet-glow');
+  }
+</style>

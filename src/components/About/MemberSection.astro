@@ -1,0 +1,53 @@
+---
+import SocialLinks from './SocialLinks.astro';
+
+interface Props {
+  name: string;
+  instrument: string;
+  image: string;
+  bio: string;
+  socialLinks?: {
+    instagram?: string;
+    twitter?: string;
+    soundcloud?: string;
+  };
+  reverse?: boolean;
+}
+
+const { name, instrument, image, bio, socialLinks, reverse = false } = Astro.props;
+---
+
+<section class="py-20 px-4">
+  <div class:list={[
+    "max-w-6xl mx-auto grid gap-8 items-center",
+    "md:grid-cols-2",
+    reverse ? "md:grid-flow-dense" : ""
+  ]}>
+    <div class:list={[
+      "relative aspect-[3/4] group",
+      reverse ? "md:col-start-2" : ""
+    ]}>
+      <img
+        src={image}
+        alt={name}
+        class="w-full h-full object-cover rounded-lg shadow-lg"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </div>
+    
+    <div class:list={[
+      "flex flex-col justify-center",
+      reverse ? "md:col-start-1" : ""
+    ]}>
+      <h2 class="text-3xl md:text-4xl font-bold mb-2 glow">
+        {name}
+      </h2>
+      <p class="text-xl text-violet-glow mb-6">
+        {instrument}
+      </p>
+      <div class="prose prose-invert mb-6" set:html={bio} />
+      
+      {socialLinks && <SocialLinks links={socialLinks} />}
+    </div>
+  </div>
+</section>

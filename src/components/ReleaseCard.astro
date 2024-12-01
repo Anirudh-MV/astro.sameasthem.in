@@ -1,0 +1,59 @@
+---
+import StreamingLink from './StreamingLink.astro';
+import { formatDate } from '../utils/date-formatter';
+
+interface Props {
+  title: string;
+  releaseDate: Date;
+  coverImage: string;
+  description: string;
+  youtubeEmbed?: string;
+  streamingLinks?: {
+    spotify?: string;
+    apple?: string;
+    bandcamp?: string;
+    youtube?: string;
+  };
+}
+
+const { title, releaseDate, coverImage, description, streamingLinks } = Astro.props;
+---
+
+<article class="bg-deep-blue rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02] duration-300">
+  <div class="aspect-square overflow-hidden">
+    <img
+      src={coverImage}
+      alt={title}
+      class="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
+    />
+  </div>
+  
+  <div class="p-6">
+    <h2 class="text-2xl font-bold mb-2 hover-glow">
+      {title}
+    </h2>
+    <p class="text-violet-glow mb-4">
+      {formatDate(releaseDate)}
+    </p>
+    <p class="text-gray-300 mb-6">
+      {description}
+    </p>
+    
+    {streamingLinks && (
+      <div class="flex gap-4">
+        {streamingLinks.spotify && (
+          <StreamingLink href={streamingLinks.spotify} platform="spotify" />
+        )}
+        {streamingLinks.apple && (
+          <StreamingLink href={streamingLinks.apple} platform="apple" />
+        )}
+        {streamingLinks.youtube && (
+          <StreamingLink href={streamingLinks.youtube} platform="youtube" />
+        )}
+        {streamingLinks.bandcamp && (
+          <StreamingLink href={streamingLinks.bandcamp} platform="bandcamp" />
+        )}
+      </div>
+    )}
+  </div>
+</article>
