@@ -35,10 +35,13 @@ const latestRelease = releases.sort(
             allowfullscreen
           />
         )}
+        <p class="text-4xl mb-8 text-violet-glow hover-glow">
+          Upcoming Release
+        </p>
         <h1 class="text-5xl md:text-7xl font-bold mb-4 glow">
           {latestRelease.data.title}
         </h1>
-        <p class="text-xl mb-8 text-violet-glow">
+        <p class="text-xl mb-8 text-violet-glow hover-glow">
           Release date - {formatDate(latestRelease.data.releaseDate)}
         </p>
 
