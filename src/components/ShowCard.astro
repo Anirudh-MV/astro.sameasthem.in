@@ -1,5 +1,5 @@
 ---
-import { formatShowDate } from '../utils/date-formatter';
+import { formatShowDateTime } from '../utils/date-formatter';
 
 interface Props {
   venue: string;
@@ -18,7 +18,7 @@ const { venue, date, location, ticketLink, price, description } = Astro.props;
     <div class="flex justify-between items-start mb-4">
       <div>
         <h2 class="text-2xl font-bold hover-glow">{venue}</h2>
-        <p class="text-violet-glow">{formatShowDate(date)}</p>
+        <p class="text-violet-glow">{formatShowDateTime(date)}</p>
         <p class="text-gray-300 mt-2">{location}</p>
       </div>
       {price && (
