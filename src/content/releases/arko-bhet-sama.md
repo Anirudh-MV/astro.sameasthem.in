@@ -1,5 +1,5 @@
 ---
-title: "Arko Bhet Sama"
+title: "Arko Bhet Samma"
 releaseDate: 2025-03-22
 coverImage: "/images/album-cover.webp"
 youtubeEmbed: ""
