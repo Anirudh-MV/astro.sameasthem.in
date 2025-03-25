@@ -9,4 +9,4 @@ streamingLinks:
   youtube: "https://www.youtube.com/watch?v=fEeL5o_3vQQ"
 ---
 
-Our song will be out soon, completing the first album!
+This latest track makes our first album a success. You wouldn't want to miss the Youtube video!
