@@ -25,3 +25,8 @@ export function formatShowDate(date: Date): string {
     day: 'numeric',
   }).format(date);
 }
+
+export function getShowDate(date: Date): string {
+  return new Date(date).toISOString().split('T')[0]
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+}

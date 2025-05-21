@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { formatDate } from "../utils/date-formatter";
+import { getHeroHeader } from "../utils/dynamic-text";
 import StreamingLink from "./StreamingLink.astro";
 
 const releases = await getCollection("releases");
@@ -36,7 +37,7 @@ const latestRelease = releases.sort(
           />
         )}
         <p class="text-4xl mb-8 text-violet-glow hover-glow">
-          Upcoming Release
+          {getHeroHeader(latestRelease.data.releaseDate)}
         </p>
         <h1 class="text-5xl md:text-7xl font-bold mb-4 glow">
           {latestRelease.data.title}
