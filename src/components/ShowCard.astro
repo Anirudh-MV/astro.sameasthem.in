@@ -37,7 +37,7 @@ const { venue, date, location, ticketLink, price, description, images } = Astro.
 
     {
       images && images[0] && (
-        <div class="w-full mx-auto mb-4 flex justify-center">
+        <div class="w-full mx-auto mb-4 flex justify-center hover:scale-125 transition-transform duration-300">
           <img
             src={images[0]}
             alt={`${venue} event`}
