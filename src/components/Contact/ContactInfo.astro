@@ -2,9 +2,10 @@
 interface Props {
   email: string;
   image: string;
+  contact: string;
 }
 
-const { email, image } = Astro.props;
+const { email, image, contact } = Astro.props;
 ---
 
 <div class="bg-deep-blue/50 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-violet-glow/10 space-y-8">
@@ -24,12 +25,17 @@ const { email, image } = Astro.props;
     </div>
     
     <div class="pt-2">
-      <h4 class="text-lg font-medium text-violet-glow mb-2">Email Us</h4>
       <a
         href={`mailto:${email}`}
         class="inline-block text-lg text-violet-glow hover:text-violet-accent transition-colors duration-200 hover-glow"
       >
         {email}
+      </a><br />
+      <a
+        href={`tel:${contact}`}
+        class="inline-block text-lg text-violet-glow hover:text-violet-accent transition-colors duration-200 hover-glow"
+      >
+        {contact}
       </a>
     </div>
   </div>

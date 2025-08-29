@@ -1,5 +1,5 @@
 ---
-import { formatShowDateTime } from '../utils/date-formatter';
+import { formatShowDateTime } from "../utils/date-formatter";
 
 interface Props {
   venue: string;
@@ -8,12 +8,15 @@ interface Props {
   ticketLink?: string;
   price?: string;
   description?: string;
+  images?: string[];
 }
 
-const { venue, date, location, ticketLink, price, description } = Astro.props;
+const { venue, date, location, ticketLink, price, description, images } = Astro.props;
 ---
 
-<article class="bg-deep-blue rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02] duration-300">
+<article
+  class="bg-deep-blue rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02] duration-300"
+>
   <div class="p-6">
     <div class="flex justify-between items-start mb-4">
       <div>
@@ -21,26 +24,40 @@ const { venue, date, location, ticketLink, price, description } = Astro.props;
         <p class="text-violet-glow">{formatShowDateTime(date)}</p>
         <p class="text-gray-300 mt-2">{location}</p>
       </div>
-      {price && (
-        <span class="bg-violet-accent/20 text-violet-glow px-3 py-1 rounded-full text-sm">
-          {price}
-        </span>
-      )}
+      {
+        price && (
+          <span class="bg-violet-accent/20 text-violet-glow px-3 py-1 rounded-full text-sm">
+            {price}
+          </span>
+        )
+      }
     </div>
-    
-    {description && (
-      <p class="text-gray-300 mb-4">{description}</p>
-    )}
-    
-    {ticketLink && (
-      <a
-        href={ticketLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-block bg-violet-accent hover:bg-violet-glow text-white px-6 py-2 rounded-full transition-colors duration-200"
-      >
-        Get Tickets
-      </a>
-    )}
+
+    {description && <p class="text-gray-300 mb-4">{description}</p>}
+
+    {
+      images && images[0] && (
+        <div class="w-full mx-auto mb-4 flex justify-center">
+          <img
+            src={images[0]}
+            alt={`${venue} event`}
+            class="block object-contain max-w-full max-h-96"
+          />
+        </div>
+      )
+    }
+
+    {
+      ticketLink && (
+        <a
+          href={ticketLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-violet-accent hover:bg-violet-glow text-white px-6 py-2 rounded-full transition-colors duration-200"
+        >
+          Get Tickets
+        </a>
+      )
+    }
   </div>
 </article>
